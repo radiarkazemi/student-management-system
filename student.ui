@@ -2140,6 +2140,56 @@
           <height>441</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <column>
+         <property name="text">
+          <string>National Id</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student Firstname</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student Lastname</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Gender</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>New Column</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Birthday</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Grade</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Address</string>
+         </property>
+        </column>
        </widget>
        <widget class="QLineEdit" name="national_id_report_stu_lineEdit">
         <property name="geometry">
@@ -2386,6 +2436,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
       </widget>
       <widget class="QLabel" name="password_label">
        <property name="geometry">
@@ -2437,12 +2490,15 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
       </widget>
       <widget class="QPushButton" name="add_user_pushButton">
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>360</y>
+         <y>410</y>
          <width>271</width>
          <height>46</height>
         </rect>
@@ -2456,8 +2512,29 @@
         <string>Add User</string>
        </property>
       </widget>
+      <widget class="QLabel" name="wrong_password_label">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>340</y>
+         <width>367</width>
+         <height>37</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </widget>
      <widget class="QGroupBox" name="edit_user_groupBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>690</x>
@@ -2490,6 +2567,9 @@
         <font>
          <pointsize>16</pointsize>
         </font>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
        </property>
       </widget>
       <widget class="QLineEdit" name="username_lineEdit_edit">
@@ -2611,6 +2691,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
       </widget>
       <widget class="QLineEdit" name="user_fullname_lineEdit_edit">
        <property name="geometry">
@@ -2721,7 +2804,7 @@
        <property name="geometry">
         <rect>
          <x>270</x>
-         <y>110</y>
+         <y>100</y>
          <width>331</width>
          <height>43</height>
         </rect>
@@ -2730,6 +2813,27 @@
         <font>
          <pointsize>16</pointsize>
         </font>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="login_user_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>160</y>
+         <width>261</width>
+         <height>46</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Login</string>
        </property>
       </widget>
      </widget>
