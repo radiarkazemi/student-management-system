@@ -16,6 +16,7 @@ TABLES['student'] = (
     "  `grade` varchar(5) NOT NULL,"
     "  `email` varchar(45),"
     "  `address` varchar(90),"
+    "   `photo` BLOB NOT NULL,"
     "  PRIMARY KEY (`id`)"
     ") ENGINE=InnoDB")
 
