@@ -1,0 +1,32 @@
+Student Managment System:
+	Student:
+		-Add New Student
+		-Edit Student
+		-Delete Stutent
+
+	Marks:
+		-Add Marks
+		-Edit Marks
+		-Delete Marks
+	
+
+	-Attendance
+		-Add Attendance
+		-Edit Attendance
+		-Delete Attendance
+
+
+	-Reports:
+		-Student Reports
+		-Marks Reports
+		-Attendance Reports
+
+	-users:
+		-username
+		-password
+		-Email
+		-Mobile
+		-Address
+
+	-Login
+	

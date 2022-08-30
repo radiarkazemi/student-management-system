@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource>
+        <file>icons/student.png</file>
+        <file>icons/marks.png</file>
+        <file>icons/users.png</file>
+        <file>icons/attendance.png</file>
+        <file>icons/report.png</file>
+    </qresource>
+</RCC>
