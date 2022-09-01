@@ -7,7 +7,7 @@ TABLES = {}
 TABLES['student'] = (
     "CREATE TABLE `student` ("
     "  `id` int(15) NOT NULL AUTO_INCREMENT,"
-    "  `national_id` int(15) NOT NULL,"
+    "  `national_id` varchar(15) NOT NULL,"
     "  `firstname` varchar(45) NOT NULL,"
     "  `lastname` varchar(45) NOT NULL,"
     "  `gender` varchar(10) NOT NULL,"
@@ -16,7 +16,7 @@ TABLES['student'] = (
     "  `grade` varchar(5) NOT NULL,"
     "  `email` varchar(45),"
     "  `address` varchar(90),"
-    "   `photo` BLOB NOT NULL,"
+    "   `photo` LONGBLOB NOT NULL,"
     "  PRIMARY KEY (`id`)"
     ") ENGINE=InnoDB")
 
