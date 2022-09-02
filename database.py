@@ -23,7 +23,7 @@ TABLES['student'] = (
 TABLES['marks'] = (
     "CREATE TABLE `marks` ("
     "   `id` int(15) NOT NULL AUTO_INCREMENT,"
-    "   `national_id` int(15) NOT NULL,"
+    "   `national_id` varchar(15) NOT NULL,"
     "   `exam_name` varchar(30) NOT NULL,"
     "   `language` varchar(5) NOT NULL,"
     "   `biology` varchar(5) NOT NULL,"
