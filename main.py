@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 import sys
 import mysql.connector
 import functools
+import jdatetime
+from datetime import date
 
 from PyQt5.uic import loadUiType
 import database as database_db
@@ -25,6 +27,8 @@ class MainApp(QMainWindow, ui):
 
     def handle_ui_changes(self):
         self.main_tabWidget.tabBar().setVisible(False)
+        today_date = date.today()
+        self.date_attendance_lineEdit.setText(str(today_date))
 
     def handle_button(self):
         self.studen_pushButton.clicked.connect(self.open_student_tab)
@@ -49,6 +53,11 @@ class MainApp(QMainWindow, ui):
         self.search_marks_pushButton.clicked.connect(self.search_marks)
         self.edit_marks_pushButton.clicked.connect(self.edit_marks)
         self.delete_marks_pushButton.clicked.connect(self.delete_marks)
+
+        self.save_attendance_pushButton.clicked.connect(self.add_attendance)
+        self.get_date_pushButton.clicked.connect(self.search_attendance)
+        self.update_attendance_pushButton.clicked.connect(self.edit_attendance)
+        self.delete_attendance_pushButton.clicked.connect(self.delete_attendance)
 
     # =============================================open tab=============================================
 
@@ -311,13 +320,89 @@ class MainApp(QMainWindow, ui):
 
     # ============================================= Attendance =============================================
     def add_attendance(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        national_id = self.national_id_attendance_lineEdit.text()
+        date = self.date_attendance_lineEdit.text()
+        morning_time = self.morning_attendance_lineEdit.text()
+        evening_time = self.evening_attendance_lineEdit.text()
+
+        cursor.execute('''
+            INSERT INTO attendance (national_id , date_attendance , morning , evening)
+            VALUES (%s , %s , %s , %s)
+        ''', (national_id, date, morning_time, evening_time))
+        db.commit()
+        db.close()
+        self.message_box('Attendance Added')
+
+    def search_attendance(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_attendance_lineEdit_search_edit.text()
+        original_date = self.date_attendance_lineEdit_search_edit.text()
+        try:
+            sql = ''' SELECT * FROM attendance WHERE (national_id = %s AND date_attendance = %s)'''
+            cursor.execute(sql, [(original_national_id), (original_date)])
+            data = cursor.fetchone()
+            if data is not None:
+                self.national_id_attendance_lineEdit_edit.setText(data[1])
+                self.date_attendance_lineEdit_edit.setText(str(data[2]))
+                self.morning_attendance_lineEdit_edit.setText(data[3])
+                self.evening_attendance_lineEdit_edit.setText(data[4])
+        except ValueError:
+            self.message_box('Record does Not Exist!')
 
     def edit_attendance(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_attendance_lineEdit_search_edit.text()
+        original_date = self.date_attendance_lineEdit_search_edit.text()
+
+        national_id = self.national_id_attendance_lineEdit_edit.text()
+        date_a = self.date_attendance_lineEdit_edit.text()
+        morning_time = self.morning_attendance_lineEdit_edit.text()
+        evening_time = self.evening_attendance_lineEdit_edit.text()
+
+        cursor.execute('''
+            UPDATE attendance SET national_id = %s , date_attendance = %s , morning = %s , evening = %s
+            WHERE (national_id = %s AND date_attendance = %s)
+        ''', (national_id, date_a, morning_time, evening_time, original_national_id, original_date))
+        db.commit()
+        db.close()
+        self.message_box('Information Updated!')
 
     def delete_attendance(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_attendance_lineEdit_search_edit.text()
+        original_date = self.date_attendance_lineEdit_search_edit.text()
+
+        warning = QMessageBox.warning(
+            self, 'Delete Attendance',
+            "Are You Sure You Want to Delete This Student's Attendance Information In This Date?",
+            QMessageBox.Yes | QMessageBox.No)
+
+        if warning == QMessageBox.Yes:
+            sql = ''' DELETE FROM attendance WHERE (national_id = %s AND date_attendance = %s)'''
+            cursor.execute(sql, [(original_national_id), (original_date)])
+            db.commit()
+            db.close()
+            self.message_box('Information Deleted Successfully!')
+
+            self.national_id_attendance_lineEdit_search_edit.setText('')
+            self.date_attendance_lineEdit_search_edit.setText('')
+            self.national_id_attendance_lineEdit_edit.setText('')
+            self.date_attendance_lineEdit_edit.setText('')
+            self.morning_attendance_lineEdit_edit.setText('')
+            self.evening_attendance_lineEdit_edit.setText('')
 
     # ============================================= Reports =============================================
     def student_report(self):
@@ -329,7 +414,7 @@ class MainApp(QMainWindow, ui):
     def attendance_report(self):
         pass
 
-    # ============================================= Reports =============================================
+    # ============================================= User =============================================
     def add_user(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
                                      database='student_management')
