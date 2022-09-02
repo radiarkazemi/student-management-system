@@ -45,6 +45,11 @@ class MainApp(QMainWindow, ui):
         self.edit_stu_pushButton.clicked.connect(self.edit_student)
         self.delete_stu_pushButton.clicked.connect(self.delete_student)
 
+        self.save_marks_pushButton.clicked.connect(self.add_marks)
+        self.search_marks_pushButton.clicked.connect(self.search_marks)
+        self.edit_marks_pushButton.clicked.connect(self.edit_marks)
+        self.delete_marks_pushButton.clicked.connect(self.delete_marks)
+
     # =============================================open tab=============================================
 
     def open_student_tab(self):
@@ -197,13 +202,112 @@ class MainApp(QMainWindow, ui):
 
     # ============================================= Marks =============================================
     def add_marks(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        national_id = self.national_id_lineEdit_marks.text()
+        exam_name = self.exam_name_comboBox.currentText()
+        language = self.language_lineEdit.text()
+        biology = self.biology_lineEdit.text()
+        math = self.math_lineEdit.text()
+        chemistry = self.chemistry_lineEdit.text()
+        pysics = self.physics_lineEdit.text()
+        sport = self.sport_lineEdit.text()
+
+        cursor.execute('''
+            INSERT INTO marks (national_id , exam_name , language , biology , math , chemistry , physics , sport)
+            VALUES (%s , %s , %s , %s , %s , %s , %s , %s)
+        ''', (national_id, exam_name, language, biology, math, chemistry, pysics, sport))
+        db.commit()
+        db.close()
+        self.message_box('Marks Added!')
+
+        self.national_id_lineEdit_marks.setText('')
+        self.exam_name_comboBox.setCurrentIndex(0)
+        self.language_lineEdit.setText('')
+        self.biology_lineEdit.setText('')
+        self.math_lineEdit.setText('')
+        self.chemistry_lineEdit.setText('')
+        self.physics_lineEdit.setText('')
+        self.sport_lineEdit.setText('')
+
+    def search_marks(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_lineEdit_marks_search_edit.text()
+        original_exam_name = self.exam_name_comboBox_edit_search.currentText()
+        try:
+            sql = ''' SELECT * FROM marks WHERE  (national_id = %s AND exam_name = %s)'''
+            cursor.execute(sql, [(original_national_id), (original_exam_name)])
+            data = cursor.fetchone()
+            if data is not None:
+                self.national_id_lineEdit_marks_edit.setText(data[1])
+                self.exam_name_comboBox_edit.setCurrentText(data[2])
+                self.language_lineEdit_edit.setText(data[3])
+                self.biology_lineEdit_edit.setText(data[4])
+                self.math_lineEdit_edit.setText(data[5])
+                self.chemistry_lineEdit_edit.setText(data[6])
+                self.physics_lineEdit_edit.setText(data[7])
+                self.sport_lineEdit_edit.setText(data[8])
+        except ValueError:
+            self.message_box('Record does Not Exist!')
 
     def edit_marks(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_lineEdit_marks_search_edit.text()
+        original_exam_name = self.exam_name_comboBox_edit_search.currentText()
+        national_id = self.national_id_lineEdit_marks_edit.text()
+        exam_name = self.exam_name_comboBox_edit.currentText()
+        language = self.language_lineEdit_edit.text()
+        biology = self.biology_lineEdit_edit.text()
+        math = self.math_lineEdit_edit.text()
+        chemistry = self.chemistry_lineEdit_edit.text()
+        pysics = self.physics_lineEdit_edit.text()
+        sport = self.sport_lineEdit_edit.text()
+
+        cursor.execute('''
+            UPDATE marks SET national_id = %s , exam_name = %s , language = %s , biology = %s , math = %s ,
+             chemistry = %s , physics = %s , sport = %s WHERE (national_id = %s AND exam_name = %s)
+        ''', (national_id, exam_name, language, biology, math, chemistry, pysics, sport, original_national_id,
+              original_exam_name))
+        db.commit()
+        db.close()
+        self.message_box('Student Information Updated')
 
     def delete_marks(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        original_national_id = self.national_id_lineEdit_marks_search_edit.text()
+        original_exam_name = self.exam_name_comboBox_edit_search.currentText()
+
+        warning = QMessageBox.warning(self, 'Delete Marks', "Are You Sure You Want to Delete This Student's Marks?",
+                                      QMessageBox.Yes | QMessageBox.No)
+
+        if warning == QMessageBox.Yes:
+            sql = ''' DELETE FROM marks WHERE (national_id = %s AND exam_name = %s)'''
+            cursor.execute(sql, [(original_national_id), (original_exam_name)])
+            db.commit()
+            db.close()
+            self.message_box("This Student's Marks in This Exam Deleted!")
+
+            self.national_id_lineEdit_marks_search_edit.setText('')
+            self.exam_name_comboBox_edit_search.setCurrentIndex(0)
+            self.national_id_lineEdit_marks_edit.setText('')
+            self.exam_name_comboBox_edit.setCurrentIndex(0)
+            self.language_lineEdit_edit.setText('')
+            self.biology_lineEdit_edit.setText('')
+            self.math_lineEdit_edit.setText('')
+            self.chemistry_lineEdit_edit.setText('')
+            self.physics_lineEdit_edit.setText('')
+            self.sport_lineEdit_edit.setText('')
 
     # ============================================= Attendance =============================================
     def add_attendance(self):
