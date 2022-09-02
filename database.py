@@ -37,8 +37,8 @@ TABLES['marks'] = (
 TABLES['attendance'] = (
     "CREATE TABLE `attendance` ("
     "   `id` int(15) NOT NULL AUTO_INCREMENT,"
-    "   `national_id` int(15) NOT NULL,"
-    "   `date` date NOT NULL,"
+    "   `national_id` varchar(15) NOT NULL,"
+    "   `date_attendance` date NOT NULL,"
     "   `morning` varchar(20) NOT NULL,"
     "   `evening` varchar(20) NOT NULL,"
     "   PRIMARY KEY (`id`)"
