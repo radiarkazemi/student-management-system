@@ -25,6 +25,19 @@ class MainApp(QMainWindow, ui):
         self.handle_button()
         self.show_all_students()
 
+        self.student_report()
+        self.marks_report()
+        self.attendance_report()
+
+        self.student_tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.student_tableWidget.resizeColumnsToContents()
+
+        self.mark_tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.mark_tableWidget.resizeColumnsToContents()
+
+        self.attendance_tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.attendance_tableWidget.resizeColumnsToContents()
+
     def handle_ui_changes(self):
         self.main_tabWidget.tabBar().setVisible(False)
         today_date = date.today()
@@ -126,6 +139,7 @@ class MainApp(QMainWindow, ui):
         db.commit()
         db.close()
         self.message_box('Student Added!')
+        self.student_report()
 
     def search_stusent(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -178,6 +192,7 @@ class MainApp(QMainWindow, ui):
         db.commit()
         db.close()
         self.message_box('Student Information Updated!')
+        self.student_report()
 
     def delete_student(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -208,6 +223,8 @@ class MainApp(QMainWindow, ui):
             self.address_textEdit_edit.setPlainText('')
             pixmap = QPixmap('images/student.jpg')
             self.image_label_edit.setPixmap(pixmap)
+
+            self.student_report()
 
     # ============================================= Marks =============================================
     def add_marks(self):
@@ -240,6 +257,7 @@ class MainApp(QMainWindow, ui):
         self.chemistry_lineEdit.setText('')
         self.physics_lineEdit.setText('')
         self.sport_lineEdit.setText('')
+        self.marks_report()
 
     def search_marks(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -288,6 +306,7 @@ class MainApp(QMainWindow, ui):
         db.commit()
         db.close()
         self.message_box('Student Information Updated')
+        self.marks_report()
 
     def delete_marks(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -317,6 +336,7 @@ class MainApp(QMainWindow, ui):
             self.chemistry_lineEdit_edit.setText('')
             self.physics_lineEdit_edit.setText('')
             self.sport_lineEdit_edit.setText('')
+            self.marks_report()
 
     # ============================================= Attendance =============================================
     def add_attendance(self):
@@ -336,6 +356,7 @@ class MainApp(QMainWindow, ui):
         db.commit()
         db.close()
         self.message_box('Attendance Added')
+        self.attendance_report()
 
     def search_attendance(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -376,6 +397,7 @@ class MainApp(QMainWindow, ui):
         db.commit()
         db.close()
         self.message_box('Information Updated!')
+        self.attendance_report()
 
     def delete_attendance(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
@@ -403,16 +425,79 @@ class MainApp(QMainWindow, ui):
             self.date_attendance_lineEdit_edit.setText('')
             self.morning_attendance_lineEdit_edit.setText('')
             self.evening_attendance_lineEdit_edit.setText('')
+            self.attendance_report()
 
     # ============================================= Reports =============================================
     def student_report(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        cursor.execute('''
+            SELECT national_id,firstname,lastname,email,gender,mobile,birth_day,grade,address FROM student
+        ''')
+        data = cursor.fetchall()
+
+        self.student_tableWidget.setRowCount(0)
+        self.student_tableWidget.insertRow(0)
+        for row, form in enumerate(data):
+            for column, item in enumerate(form):
+                self.student_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                column += 1
+
+            row_position = self.student_tableWidget.rowCount()
+            self.student_tableWidget.insertRow(row_position)
+        db.close()
 
     def marks_report(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        cursor.execute('''
+            SELECT marks.national_id,student.firstname,student.lastname,marks.exam_name,marks.language,marks.biology,
+            marks.math,marks.chemistry,marks.physics,marks.sport
+            FROM student_management.marks 
+            join student_management.student
+            on student_management.marks.national_id = student_management.student.national_id
+        ''')
+        data = cursor.fetchall()
+
+        self.mark_tableWidget.setRowCount(0)
+        self.mark_tableWidget.insertRow(0)
+        for row, form in enumerate(data):
+            for column, item in enumerate(form):
+                self.mark_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                column += 1
+
+            row_position = self.mark_tableWidget.rowCount()
+            self.mark_tableWidget.insertRow(row_position)
+        db.close()
 
     def attendance_report(self):
-        pass
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        cursor.execute('''
+            SELECT attendance.national_id,student.firstname,student.lastname,attendance.date_attendance,
+            attendance.morning,attendance.evening
+            FROM student_management.attendance
+            join student_management.student on student_management.attendance.national_id = student_management.student.national_id
+        ''')
+
+        data = cursor.fetchall()
+
+        self.attendance_tableWidget.setRowCount(0)
+        self.attendance_tableWidget.insertRow(0)
+        for row, form in enumerate(data):
+            for column, item in enumerate(form):
+                self.attendance_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                column += 1
+
+            row_position = self.attendance_tableWidget.rowCount()
+            self.attendance_tableWidget.insertRow(row_position)
+        db.close()
 
     # ============================================= User =============================================
     def add_user(self):
