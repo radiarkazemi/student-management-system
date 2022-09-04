@@ -214,7 +214,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
@@ -1442,7 +1442,7 @@
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>400</y>
+         <y>500</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1453,11 +1453,11 @@
         </font>
        </property>
       </widget>
-      <widget class="QComboBox" name="exam_name_comboBox_edit">
+      <widget class="QComboBox" name="exam_name_comboBox_edit_search">
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>150</y>
+         <y>130</y>
          <width>251</width>
          <height>43</height>
         </rect>
@@ -1487,7 +1487,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>320</y>
+         <y>420</y>
          <width>82</width>
          <height>37</height>
         </rect>
@@ -1505,7 +1505,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>400</y>
+         <y>500</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1520,7 +1520,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>400</y>
+         <y>500</y>
          <width>104</width>
          <height>37</height>
         </rect>
@@ -1538,7 +1538,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>240</y>
+         <y>340</y>
          <width>137</width>
          <height>37</height>
         </rect>
@@ -1556,7 +1556,7 @@
        <property name="geometry">
         <rect>
          <x>330</x>
-         <y>320</y>
+         <y>420</y>
          <width>138</width>
          <height>37</height>
         </rect>
@@ -1574,7 +1574,7 @@
        <property name="geometry">
         <rect>
          <x>330</x>
-         <y>240</y>
+         <y>340</y>
          <width>110</width>
          <height>37</height>
         </rect>
@@ -1610,7 +1610,7 @@
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>240</y>
+         <y>340</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1621,7 +1621,7 @@
         </font>
        </property>
       </widget>
-      <widget class="QLineEdit" name="national_id_lineEdit_marks_edit">
+      <widget class="QLineEdit" name="national_id_lineEdit_marks_search_edit">
        <property name="geometry">
         <rect>
          <x>240</x>
@@ -1640,7 +1640,7 @@
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>320</y>
+         <y>420</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1655,7 +1655,7 @@
        <property name="geometry">
         <rect>
          <x>330</x>
-         <y>400</y>
+         <y>500</y>
          <width>84</width>
          <height>37</height>
         </rect>
@@ -1673,7 +1673,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>240</y>
+         <y>340</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1688,7 +1688,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>320</y>
+         <y>420</y>
          <width>91</width>
          <height>43</height>
         </rect>
@@ -1703,7 +1703,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>150</y>
+         <y>130</y>
          <width>161</width>
          <height>37</height>
         </rect>
@@ -1721,7 +1721,7 @@
        <property name="geometry">
         <rect>
          <x>470</x>
-         <y>150</y>
+         <y>130</y>
          <width>151</width>
          <height>46</height>
         </rect>
@@ -1770,6 +1770,90 @@
        <property name="text">
         <string>Delete</string>
        </property>
+      </widget>
+      <widget class="QLabel" name="national_id_label_marks_edit_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>152</width>
+         <height>37</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>National Id : </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="exam_label_edit_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>270</y>
+         <width>161</width>
+         <height>37</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Exam Name : </string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="national_id_lineEdit_marks_edit">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>200</y>
+         <width>331</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="exam_name_comboBox_edit">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>270</y>
+         <width>271</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>Quarter Year Exam</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Half Year Exam</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Final Exam</string>
+        </property>
+       </item>
       </widget>
      </widget>
     </widget>
@@ -1982,7 +2066,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>260</y>
+         <y>390</y>
          <width>251</width>
          <height>43</height>
         </rect>
@@ -1997,7 +2081,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>160</y>
+         <y>150</y>
          <width>76</width>
          <height>37</height>
         </rect>
@@ -2011,11 +2095,11 @@
         <string>Date : </string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="date_attendance_lineEdit_edit">
+      <widget class="QLineEdit" name="date_attendance_lineEdit_search_edit">
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>160</y>
+         <y>150</y>
          <width>251</width>
          <height>43</height>
         </rect>
@@ -2030,7 +2114,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>360</y>
+         <y>460</y>
          <width>114</width>
          <height>37</height>
         </rect>
@@ -2047,9 +2131,9 @@
       <widget class="QPushButton" name="update_attendance_pushButton">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>510</y>
-         <width>321</width>
+         <x>330</x>
+         <y>560</y>
+         <width>291</width>
          <height>51</height>
         </rect>
        </property>
@@ -2080,7 +2164,7 @@
         <string>National Id : </string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="national_id_attendance_lineEdit_edit">
+      <widget class="QLineEdit" name="national_id_attendance_lineEdit_search_edit">
        <property name="geometry">
         <rect>
          <x>240</x>
@@ -2099,7 +2183,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>360</y>
+         <y>460</y>
          <width>251</width>
          <height>43</height>
         </rect>
@@ -2114,7 +2198,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>260</y>
+         <y>390</y>
          <width>122</width>
          <height>37</height>
         </rect>
@@ -2132,7 +2216,7 @@
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>160</y>
+         <y>150</y>
          <width>141</width>
          <height>46</height>
         </rect>
@@ -2144,6 +2228,90 @@
        </property>
        <property name="text">
         <string>Get Date</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="date_attendance_lineEdit_edit">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>320</y>
+         <width>251</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QLabel" name="national_id_attendance_label_edit_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>250</y>
+         <width>152</width>
+         <height>37</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>National Id : </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="date_attendance_label_edit_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>320</y>
+         <width>76</width>
+         <height>37</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Date : </string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="national_id_attendance_lineEdit_edit">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>250</y>
+         <width>321</width>
+         <height>43</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="delete_attendance_pushButton">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>560</y>
+         <width>291</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Delete Attendance</string>
        </property>
       </widget>
      </widget>
@@ -2217,7 +2385,7 @@
         </column>
         <column>
          <property name="text">
-          <string>New Column</string>
+          <string>Mobile</string>
          </property>
         </column>
         <column>
@@ -2304,6 +2472,56 @@
           <height>441</height>
          </rect>
         </property>
+        <column>
+         <property name="text">
+          <string>National Id</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student First Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student Last Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Exam Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Language</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Biology</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Math</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Chemistry</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Physics</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Sport</string>
+         </property>
+        </column>
        </widget>
        <widget class="QPushButton" name="mark_report_searchpushButton">
         <property name="geometry">
@@ -2355,6 +2573,36 @@
           <height>451</height>
          </rect>
         </property>
+        <column>
+         <property name="text">
+          <string>National Id</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student First Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Student Last Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Date</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Morning</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Evening</string>
+         </property>
+        </column>
        </widget>
        <widget class="QPushButton" name="attendance_report_searchpushButton">
         <property name="geometry">
