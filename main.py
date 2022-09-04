@@ -11,6 +11,60 @@ from PyQt5.uic import loadUiType
 import database as database_db
 
 ui, _ = loadUiType('student.ui')
+login, _ = loadUiType('login.ui')
+
+
+class Login(QWidget, login):
+    def __init__(self):
+        QWidget.__init__(self)
+        self.setupUi(self)
+        self.login_pushButton.clicked.connect(self.handle_login)
+        self.signup_pushButton.clicked.connect(self.add_new_user)
+
+    def add_new_user(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+        full_name = self.user_full_name_lineEdit.text()
+        username = self.username_lineEdit.text()
+        password = self.password_signup_lineEdit.text()
+        password_confirm = self.password_confirm_signup_lineEdit.text()
+
+        if password == password_confirm:
+            cursor.execute('''
+                INSERT INTO user(fullname , username , password)
+                VALUES (%s , %s ,%s)
+            ''', (full_name, username, password))
+            db.commit()
+            MainApp.message_box(self, 'User Added!')
+
+            self.user_full_name_lineEdit.setText('')
+            self.username_lineEdit.setText('')
+            self.password_signup_lineEdit.setText('')
+            self.password_confirm_signup_lineEdit.setText('')
+        else:
+            self.wrong_password_label.setText('The Passwords Are Not Match!l')
+
+    def handle_login(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        username = self.user_name_lineEdit.text()
+        password = self.password_lineEdit.text()
+
+        sql = "SELECT * FROM user"
+        cursor.execute(sql)
+        data = cursor.fetchall()
+
+        for row in data:
+            if username == row[2] and password == row[3]:
+                MainApp.message_box(self, 'You Are In!')
+                self.window_main = MainApp()
+                self.close()
+                self.window_main.show()
+            else:
+                self.sure_label.setText('Make Sure You Enter Your Username And Password Correctly')
 
 
 class MainApp(QMainWindow, ui):
@@ -702,7 +756,7 @@ class MainApp(QMainWindow, ui):
 
 def main():
     app = QApplication(sys.argv)
-    window = MainApp()
+    window = Login()
     window.show()
     app.exec_()
 
