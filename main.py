@@ -72,6 +72,10 @@ class MainApp(QMainWindow, ui):
         self.update_attendance_pushButton.clicked.connect(self.edit_attendance)
         self.delete_attendance_pushButton.clicked.connect(self.delete_attendance)
 
+        self.stu_report_searchpushButton.clicked.connect(self.student_report_search)
+        self.mark_report_searchpushButton.clicked.connect(self.marks_report_search)
+        self.attendance_report_searchpushButton.clicked.connect(self.attendance_report_search)
+
     # =============================================open tab=============================================
 
     def open_student_tab(self):
@@ -449,6 +453,34 @@ class MainApp(QMainWindow, ui):
             self.student_tableWidget.insertRow(row_position)
         db.close()
 
+    def student_report_search(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        national_id = self.national_id_report_stu_lineEdit.text()
+
+        if national_id == "":
+            self.student_report()
+        else:
+            cursor.execute('''
+                SELECT national_id,firstname,lastname,email,gender,mobile,birth_day,grade,address FROM student
+                WHERE national_id = %s
+            ''', (national_id,))
+
+            data = cursor.fetchall()
+
+            self.student_tableWidget.setRowCount(0)
+            self.student_tableWidget.insertRow(0)
+            for row, form in enumerate(data):
+                for column, item in enumerate(form):
+                    self.student_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                    column += 1
+
+                row_position = self.student_tableWidget.rowCount()
+                self.student_tableWidget.insertRow(row_position)
+            db.close()
+
     def marks_report(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
                                      database='student_management')
@@ -474,6 +506,37 @@ class MainApp(QMainWindow, ui):
             self.mark_tableWidget.insertRow(row_position)
         db.close()
 
+    def marks_report_search(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        national_id = self.national_id_report_mark_lineEdit.text()
+
+        if national_id == "":
+            self.marks_report()
+        else:
+            cursor.execute('''
+                        SELECT marks.national_id,student.firstname,student.lastname,marks.exam_name,marks.language,marks.biology,
+                        marks.math,marks.chemistry,marks.physics,marks.sport
+                        FROM student_management.marks 
+                        join student_management.student
+                        on student_management.marks.national_id = student_management.student.national_id
+                        WHERE marks.national_id = %s
+                    ''', (national_id,))
+            data = cursor.fetchall()
+
+            self.mark_tableWidget.setRowCount(0)
+            self.mark_tableWidget.insertRow(0)
+            for row, form in enumerate(data):
+                for column, item in enumerate(form):
+                    self.mark_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                    column += 1
+
+                row_position = self.mark_tableWidget.rowCount()
+                self.mark_tableWidget.insertRow(row_position)
+            db.close()
+
     def attendance_report(self):
         db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
                                      database='student_management')
@@ -498,6 +561,38 @@ class MainApp(QMainWindow, ui):
             row_position = self.attendance_tableWidget.rowCount()
             self.attendance_tableWidget.insertRow(row_position)
         db.close()
+
+    def attendance_report_search(self):
+        db = mysql.connector.connect(host='127.0.0.1', user='root', password='@615$011m9841k@',
+                                     database='student_management')
+        cursor = db.cursor()
+
+        national_id = self.national_id_report_attendance_lineEdit.text()
+
+        if national_id == "":
+            self.attendance_report()
+        else:
+            cursor.execute('''
+                        SELECT attendance.national_id,student.firstname,student.lastname,attendance.date_attendance,
+                        attendance.morning,attendance.evening
+                        FROM student_management.attendance
+                        join student_management.student 
+                        on student_management.attendance.national_id = student_management.student.national_id
+                        WHERE attendance.national_id = %s
+                    ''', (national_id,))
+
+            data = cursor.fetchall()
+
+            self.attendance_tableWidget.setRowCount(0)
+            self.attendance_tableWidget.insertRow(0)
+            for row, form in enumerate(data):
+                for column, item in enumerate(form):
+                    self.attendance_tableWidget.setItem(row, column, QTableWidgetItem(str(item)))
+                    column += 1
+
+                row_position = self.attendance_tableWidget.rowCount()
+                self.attendance_tableWidget.insertRow(row_position)
+            db.close()
 
     # ============================================= User =============================================
     def add_user(self):
